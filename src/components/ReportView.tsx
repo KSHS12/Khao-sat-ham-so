@@ -135,12 +135,10 @@ ${result.symmetryAxis ? `- Trục đối xứng: ${result.symmetryAxis.equation}
         </h3>
 
         <div className="pl-9 text-sm space-y-6 text-slate-200">
-          {/* Bước 1: Đạo hàm bậc 1 */}
+          {/* Đạo hàm bậc 1 */}
           <div className="space-y-2">
             <div className="font-extrabold text-emerald-300 text-base flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-300 text-xs flex items-center justify-center font-bold">
-                1
-              </span>
+              <span className="text-emerald-400 text-xl leading-none font-black">*</span>
               <span>Đạo hàm bậc một:</span>
             </div>
             <div className="my-2 p-3.5 bg-slate-950/80 border border-slate-800 rounded-xl inline-block text-white shadow-inner">
@@ -151,38 +149,10 @@ ${result.symmetryAxis ? `- Trục đối xứng: ${result.symmetryAxis.equation}
             </div>
           </div>
 
-          {/* Bước 2: Đạo hàm bậc hai */}
-          <div className="space-y-2">
-            <div className="font-extrabold text-emerald-300 text-base flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-300 text-xs flex items-center justify-center font-bold">
-                2
-              </span>
-              <span>Đạo hàm bậc hai:</span>
-            </div>
-            {result.fDoublePrimeLatex ? (
-              <div>
-                <div className="my-2 p-3.5 bg-slate-950/80 border border-slate-800 rounded-xl inline-block text-white shadow-inner">
-                  <MathView math={`y'' = f''(x) = ${result.fDoublePrimeLatex}`} displayMode />
-                </div>
-                {result.fDoublePrimeRootsLatex && (
-                  <div className="mt-1 text-slate-200 font-medium">
-                    <MathView math={result.fDoublePrimeRootsLatex} />
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="text-slate-400 italic text-xs">
-                (Đạo hàm bậc hai không yêu cầu bắt buộc đối với dạng hàm số này theo chuẩn SGK).
-              </div>
-            )}
-          </div>
-
-          {/* Bước 3: Giới hạn và tiệm cận */}
+          {/* Giới hạn và tiệm cận */}
           <div className="space-y-3">
             <div className="font-extrabold text-emerald-300 text-base flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-300 text-xs flex items-center justify-center font-bold">
-                3
-              </span>
+              <span className="text-emerald-400 text-xl leading-none font-black">*</span>
               <span>Giới hạn tại vô cực và các đường tiệm cận:</span>
             </div>
 
@@ -210,12 +180,10 @@ ${result.symmetryAxis ? `- Trục đối xứng: ${result.symmetryAxis.equation}
             </div>
           </div>
 
-          {/* BẢNG BIẾN THIÊN (ĐẶT NGAY TRONG TIẾN TRÌNH SỰ BIẾN THIÊN ĐỂ TỔNG HỢP TRƯỚC KHI KẾT LUẬN) */}
+          {/* BẢNG BIẾN THIÊN */}
           <div className="space-y-2.5 pt-2">
             <div className="font-extrabold text-emerald-400 text-base flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-300 text-xs font-black">
-                BẢNG
-              </span>
+              <span className="text-emerald-400 text-xl leading-none font-black">*</span>
               <span>Bảng biến thiên:</span>
             </div>
             <div className="pt-1">
@@ -223,12 +191,10 @@ ${result.symmetryAxis ? `- Trục đối xứng: ${result.symmetryAxis.equation}
             </div>
           </div>
 
-          {/* Bước 4: Kết luận: về chiều biến thiên, cực trị của hàm số */}
+          {/* Kết luận: về chiều biến thiên, cực trị của hàm số */}
           <div className="space-y-4 pt-2">
             <div className="font-extrabold text-emerald-300 text-base flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-300 text-xs flex items-center justify-center font-bold">
-                4
-              </span>
+              <span className="text-emerald-400 text-xl leading-none font-black">*</span>
               <span>Kết luận về chiều biến thiên và cực trị của hàm số:</span>
             </div>
 
@@ -307,18 +273,55 @@ ${result.symmetryAxis ? `- Trục đối xứng: ${result.symmetryAxis.equation}
             </div>
           )}
 
-          {result.inflectionPoints.length > 0 && (
-            <div>
-              <div className="font-extrabold text-emerald-300 text-base">Điểm uốn:</div>
-              <div className="mt-1.5">
-                {result.inflectionPoints.map((ip, idx) => (
-                  <span key={idx}>
-                    Điểm uốn <MathView math={`U(${ip.exactX};\\, ${ip.exactY})`} className="text-fuchsia-400 font-bold" />.
-                  </span>
-                ))}
+          {(() => {
+            if (!result.fDoublePrimeLatex) {
+              return (
+                <div>
+                  <div className="font-extrabold text-emerald-300 text-base flex items-center gap-2">
+                    <span className="text-emerald-400 text-xl leading-none font-black">*</span>
+                    <span>Tìm điểm uốn:</span>
+                  </div>
+                  <div className="mt-2 text-slate-400 italic text-xs">
+                    Dạng hàm số này không yêu cầu tìm điểm uốn theo chuẩn SGK.
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <div className="space-y-3">
+                <div className="font-extrabold text-emerald-300 text-base flex items-center gap-2">
+                  <span className="text-emerald-400 text-xl leading-none font-black">*</span>
+                  <span>Tìm điểm uốn của đồ thị:</span>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Đạo hàm bậc hai:</div>
+                  <div className="my-1 p-3.5 bg-slate-950/80 border border-slate-800 rounded-xl inline-block text-white shadow-inner">
+                    <MathView math={`y'' = f''(x) = ${result.fDoublePrimeLatex}`} displayMode />
+                  </div>
+                  {result.fDoublePrimeRootsLatex && (
+                    <div className="text-slate-200 font-medium">
+                      <MathView math={result.fDoublePrimeRootsLatex} />
+                    </div>
+                  )}
+                </div>
+                {result.inflectionPoints.length > 0 ? (
+                  <div className="text-slate-200 leading-relaxed bg-slate-950/70 p-4 border border-slate-800 rounded-xl">
+                    {result.inflectionPoints.map((ip, idx) => (
+                      <span key={idx}>
+                        Đồ thị có điểm uốn{' '}
+                        <MathView math={`U(${ip.exactX};\\, ${ip.exactY})`} className="text-fuchsia-400 font-bold" />,{' '}
+                        đây cũng là tâm đối xứng của đồ thị hàm số.
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-slate-200 leading-relaxed bg-slate-950/70 p-4 border border-slate-800 rounded-xl">
+                    Phương trình <MathView math="y'' = 0" /> không có nghiệm thực, đồ thị không có điểm uốn.
+                  </div>
+                )}
               </div>
-            </div>
-          )}
+            );
+          })()}
         </div>
       </section>
 
