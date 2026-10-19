@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { FunctionInput } from './components/FunctionInput';
 import { ReportView } from './components/ReportView';
 import { TheoryModal } from './components/TheoryModal';
+import { Watermark } from './components/Watermark';
 import { investigateFunction } from './math/investigator';
 import { InvestigationResult } from './math/types';
 import { AlertTriangle } from 'lucide-react';
@@ -50,6 +51,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans selection:bg-emerald-600 selection:text-white">
+      {/* Watermark layer */}
+      <Watermark />
+
       {/* 3-Zone Header Contract */}
       <Header
         onNewSurvey={handleNewSurvey}
